@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --color-brand: #00338d;
+  --color-brand-light: #0a4aad;
+  --color-surface: #f4f6fb;
+  --color-card: #ffffff;
+  --color-muted: #64748b;
+  --color-accent-teal: #0d9488;
+  --shadow-soft: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px rgb(15 23 42 / 0.06);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-surface);
+  color: #0f172a;
+}
+
+html.dark body {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Native selects: theme accent where supported */
+select {
+  accent-color: #00338d;
+}
