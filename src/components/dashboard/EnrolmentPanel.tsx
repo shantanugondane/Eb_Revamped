@@ -2,7 +2,7 @@ import { enrolmentRows } from '../../data/dashboardMock'
 
 export function EnrolmentPanel() {
   return (
-    <section className="flex h-full min-h-[320px] flex-col rounded-2xl border border-slate-200/80 bg-white shadow-[var(--shadow-soft)] dark:border-slate-700/80 dark:bg-slate-900">
+    <section className="flex min-h-[320px] flex-col rounded-2xl border border-slate-200/80 bg-white shadow-[var(--shadow-soft)] lg:h-[320px] dark:border-slate-700/80 dark:bg-slate-900">
       <div className="border-b border-slate-100 px-4 py-3 dark:border-slate-800 sm:px-5">
         <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
           Enrolment status details
@@ -11,7 +11,7 @@ export function EnrolmentPanel() {
           Window progress by corporate and policy.
         </p>
       </div>
-      <div className="flex flex-1 flex-col gap-3 overflow-auto p-3 sm:p-4">
+      <div className="flex flex-1 flex-col gap-3 overflow-y-auto p-3 sm:p-4">
         {enrolmentRows.map((row) => (
           <article
             key={row.corporate + row.policy}

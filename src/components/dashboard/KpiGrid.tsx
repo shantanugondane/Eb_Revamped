@@ -1,4 +1,5 @@
 import {
+  ArrowUpRight,
   Building2,
   ClipboardList,
   FileWarning,
@@ -12,6 +13,10 @@ import clsx from 'clsx'
 import { kpiStats } from '../../data/dashboardMock'
 
 type Stat = (typeof kpiStats)[number]
+type KpiGridProps = {
+  stats: readonly Stat[]
+  onDrillDown?: (label: string) => void
+}
 
 const toneStyles: Record<
   Stat['tone'],
@@ -59,15 +64,17 @@ const toneStyles: Record<
   },
 }
 
-export function KpiGrid({ stats }: { stats: readonly Stat[] }) {
+export function KpiGrid({ stats, onDrillDown }: KpiGridProps) {
   return (
     <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
       {stats.map((stat) => {
         const { Icon } = toneStyles[stat.tone]
         return (
-          <div
+          <button
+            type="button"
             key={stat.label}
-            className="group flex gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[var(--shadow-soft)] transition hover:border-slate-300/80 hover:shadow-md dark:border-slate-700/80 dark:bg-slate-900 dark:hover:border-slate-600"
+            onClick={() => onDrillDown?.(stat.label)}
+            className="group flex w-full gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 text-left shadow-[var(--shadow-soft)] transition hover:border-slate-300/80 hover:shadow-md dark:border-slate-700/80 dark:bg-slate-900 dark:hover:border-slate-600"
           >
             <div
               className={clsx(
@@ -85,8 +92,12 @@ export function KpiGrid({ stats }: { stats: readonly Stat[] }) {
               <p className="mt-1 font-semibold tabular-nums tracking-tight text-slate-900 dark:text-slate-100">
                 {stat.value}
               </p>
+              <p className="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-[#00338d]">
+                Drill down
+                <ArrowUpRight className="h-3 w-3" />
+              </p>
             </div>
-          </div>
+          </button>
         )
       })}
     </div>

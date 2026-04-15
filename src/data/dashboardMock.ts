@@ -101,3 +101,118 @@ export const liveClaims = [
     statusVariant: 'success' as const,
   },
 ]
+
+export const actionCenterItems = [
+  {
+    id: 'a1',
+    title: 'Pending endorsements need attention',
+    detail: '18 requests are pending for more than 24 hours.',
+    severity: 'high' as const,
+    ctaLabel: 'Review queue',
+    href: '/modules/employer-endorsement-queue',
+  },
+  {
+    id: 'a2',
+    title: 'Failed uploads in last run',
+    detail: '3 employer files failed validation and need correction.',
+    severity: 'medium' as const,
+    ctaLabel: 'Open documents',
+    href: '/modules/endorsement',
+  },
+  {
+    id: 'a3',
+    title: 'Policies near enrolment window end',
+    detail: '5 policies have less than 5 days left for enrolment.',
+    severity: 'low' as const,
+    ctaLabel: 'View policies',
+    href: '/policies/policy-list',
+  },
+] as const
+
+export const uploadHealthStats = {
+  successRate: 92.4,
+  failureRate: 7.6,
+  totalProcessed: 184,
+  failedFiles: 14,
+  avgProcessingMins: 11,
+  failureReasons: [
+    { reason: 'Member ID mismatch', count: 6 },
+    { reason: 'Invalid date format', count: 4 },
+    { reason: 'Duplicate employee rows', count: 3 },
+    { reason: 'Missing policy mapping', count: 1 },
+  ],
+} as const
+
+export const endorsementFunnel = [
+  { stage: 'Requested', count: 86, tone: 'sky' as const },
+  { stage: 'Processing', count: 41, tone: 'amber' as const },
+  { stage: 'Completed', count: 33, tone: 'emerald' as const },
+  { stage: 'Rejected', count: 12, tone: 'rose' as const },
+] as const
+
+export const slaTrackerItems = [
+  {
+    id: 's1',
+    metric: 'Endorsement TAT',
+    withinSla: 74,
+    atRisk: 11,
+    breached: 7,
+  },
+  {
+    id: 's2',
+    metric: 'Claim Doc Approval',
+    withinSla: 61,
+    atRisk: 14,
+    breached: 5,
+  },
+  {
+    id: 's3',
+    metric: 'Member Verification',
+    withinSla: 88,
+    atRisk: 9,
+    breached: 3,
+  },
+] as const
+
+export const topBlockers = [
+  {
+    id: 'b1',
+    employer: 'Tata Capital Housing Finance',
+    issue: 'Repeated upload validation failures',
+    impact: '6 failed files',
+    priority: 'P1' as const,
+    href: '/modules/endorsement',
+  },
+  {
+    id: 'b2',
+    employer: 'Tata Motors Limited',
+    issue: 'Pending endorsement approvals backlog',
+    impact: '18 requests',
+    priority: 'P1' as const,
+    href: '/modules/employer-endorsement-queue',
+  },
+  {
+    id: 'b3',
+    employer: 'TCS Limited',
+    issue: 'Member mapping mismatch in uploads',
+    impact: '9 rows blocked',
+    priority: 'P2' as const,
+    href: '/modules/endorsement',
+  },
+  {
+    id: 'b4',
+    employer: 'Tata Steel',
+    issue: 'Delayed HR onboarding completion',
+    impact: '4 employers',
+    priority: 'P2' as const,
+    href: '/modules/employer',
+  },
+  {
+    id: 'b5',
+    employer: 'BigBasket Corporate',
+    issue: 'Policy nearing enrolment deadline',
+    impact: '3 days left',
+    priority: 'P3' as const,
+    href: '/policies/policy-list',
+  },
+] as const

@@ -1,5 +1,13 @@
 import { useState } from 'react'
-import { Calendar, MoreHorizontal, RefreshCw, Search } from 'lucide-react'
+import {
+  BookmarkPlus,
+  Calendar,
+  CheckCircle2,
+  Clock3,
+  MoreHorizontal,
+  RefreshCw,
+  Search,
+} from 'lucide-react'
 import clsx from 'clsx'
 import { CustomSelect } from '../ui/CustomSelect'
 import { GlobalFilterModal } from './GlobalFilterModal'
@@ -10,6 +18,51 @@ export function FilterBar() {
   const [corporate, setCorporate] = useState('')
   const [coverType, setCoverType] = useState('')
   const [policyName, setPolicyName] = useState('')
+  const [date, setDate] = useState('2026-04-08')
+  const [savedView, setSavedView] = useState('')
+  const [savedFeedback, setSavedFeedback] = useState(false)
+
+  const savedViews = [
+    {
+      value: '',
+      label: 'Saved views',
+      corporate: '',
+      coverType: '',
+      policyName: '',
+      date: '2026-04-08',
+    },
+    {
+      value: 'daily-ops',
+      label: 'Daily Ops',
+      corporate: 'tc',
+      coverType: 'ghi',
+      policyName: 'p1',
+      date: '2026-04-08',
+    },
+    {
+      value: 'claims-watch',
+      label: 'Claims Watch',
+      corporate: 'tcs',
+      coverType: '',
+      policyName: 'p1',
+      date: '2026-04-08',
+    },
+  ] as const
+
+  const applySavedView = (value: string) => {
+    setSavedView(value)
+    const next = savedViews.find((view) => view.value === value)
+    if (!next) return
+    setCorporate(next.corporate)
+    setCoverType(next.coverType)
+    setPolicyName(next.policyName)
+    setDate(next.date)
+  }
+
+  const saveCurrentView = () => {
+    setSavedFeedback(true)
+    window.setTimeout(() => setSavedFeedback(false), 1200)
+  }
 
   return (
     <>
@@ -22,8 +75,26 @@ export function FilterBar() {
             <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
               Snapshot of enrolment, endorsements, and live cashless activity.
             </p>
+            <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700 ring-1 ring-emerald-200/60 dark:bg-emerald-950/30 dark:text-emerald-300 dark:ring-emerald-900/50">
+              <Clock3 className="h-3.5 w-3.5" />
+              Data refreshed 2 mins ago
+            </p>
           </div>
           <div className="flex flex-wrap items-end gap-2 sm:gap-3">
+            <label className="flex min-w-[140px] flex-1 flex-col gap-1.5">
+              <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+                Saved view
+              </span>
+              <CustomSelect
+                id="filter-saved-view"
+                value={savedView}
+                onChange={applySavedView}
+                options={savedViews.map((view) => ({
+                  value: view.value,
+                  label: view.label,
+                }))}
+              />
+            </label>
             <label className="flex min-w-[140px] flex-1 flex-col gap-1.5">
               <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
                 Corporate
@@ -78,7 +149,8 @@ export function FilterBar() {
               <div className="group relative">
                 <input
                   type="date"
-                  defaultValue="2026-04-08"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
                   className={clsx(
                     dateInputSurface,
                     dateSizeMd,
@@ -88,6 +160,29 @@ export function FilterBar() {
                 <Calendar className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#00338d]/45 transition-colors group-focus-within:text-[#00338d]" />
               </div>
             </label>
+            <button
+              type="button"
+              onClick={saveCurrentView}
+              className={clsx(
+                'flex h-10 shrink-0 items-center gap-1.5 rounded-xl px-3 text-xs font-semibold shadow-sm transition',
+                savedFeedback
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200',
+              )}
+              aria-label="Save current view"
+            >
+              {savedFeedback ? (
+                <>
+                  <CheckCircle2 className="h-4 w-4" />
+                  Saved
+                </>
+              ) : (
+                <>
+                  <BookmarkPlus className="h-4 w-4" />
+                  Save view
+                </>
+              )}
+            </button>
             <button
               type="button"
               className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-600 text-white shadow-md shadow-teal-600/25 transition hover:bg-teal-700"

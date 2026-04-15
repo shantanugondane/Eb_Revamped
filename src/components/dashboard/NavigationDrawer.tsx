@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import {
+  Briefcase,
+  CalendarDays,
   ChevronDown,
   ChevronUp,
   FileText,
@@ -9,6 +11,7 @@ import {
 import { NavLink, useLocation } from 'react-router-dom'
 import clsx from 'clsx'
 import { POLICIES_SUBMENU } from '../../data/policiesNav'
+import { EMPLOYER_MANAGEMENT_SUBMENU } from '../../data/moduleNav'
 
 const dashboardPath = '/'
 
@@ -21,12 +24,21 @@ export function NavigationDrawer({ open, onClose }: NavigationDrawerProps) {
   const { pathname } = useLocation()
   const onDashboard = pathname === '/' || pathname === '/dashboard'
   const policiesPathActive = pathname.startsWith('/policies')
+  const employerMgmtPathActive =
+    pathname === '/modules/employer' ||
+    pathname.startsWith('/modules/employer-') ||
+    pathname.startsWith('/modules/employer/')
 
   const [policiesOpen, setPoliciesOpen] = useState(policiesPathActive)
+  const [employerMgmtOpen, setEmployerMgmtOpen] = useState(employerMgmtPathActive)
 
   useEffect(() => {
     if (policiesPathActive) setPoliciesOpen(true)
   }, [policiesPathActive])
+
+  useEffect(() => {
+    if (employerMgmtPathActive) setEmployerMgmtOpen(true)
+  }, [employerMgmtPathActive])
 
   useEffect(() => {
     if (!open) return
@@ -109,6 +121,81 @@ export function NavigationDrawer({ open, onClose }: NavigationDrawerProps) {
             <Home className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
             Dashboard
           </NavLink>
+
+          <NavLink
+            to="/modules/endorsement"
+            title="Endorsement"
+            onClick={onClose}
+            className={({ isActive }) =>
+              clsx(
+                'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors',
+                isActive
+                  ? 'bg-sky-50 text-[#00338d] ring-1 ring-sky-100 dark:bg-sky-950/50 dark:text-sky-300 dark:ring-sky-900'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-[#00338d] dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-sky-400',
+              )
+            }
+          >
+            <CalendarDays className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
+            Endorsement
+          </NavLink>
+
+          <div className="pt-1">
+            <button
+              type="button"
+              onClick={() => setEmployerMgmtOpen((o) => !o)}
+              aria-expanded={employerMgmtOpen}
+              className={clsx(
+                'flex w-full items-center justify-between gap-2 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition-colors',
+                employerMgmtPathActive
+                  ? 'bg-sky-50 text-[#00338d] ring-1 ring-sky-100 dark:bg-sky-950/50 dark:text-sky-300 dark:ring-sky-900'
+                  : 'text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800',
+              )}
+            >
+              <span className="flex min-w-0 items-center gap-3">
+                <Briefcase
+                  className="h-[18px] w-[18px] shrink-0"
+                  strokeWidth={1.75}
+                />
+                <span className="truncate">Employer Management</span>
+              </span>
+              {employerMgmtOpen ? (
+                <ChevronUp className="h-4 w-4 shrink-0 text-slate-500" />
+              ) : (
+                <ChevronDown className="h-4 w-4 shrink-0 text-slate-500" />
+              )}
+            </button>
+
+            {employerMgmtOpen && (
+              <ul
+                className="ml-3 mt-1 space-y-0.5 border-l border-slate-200 pl-3 dark:border-slate-700"
+                role="list"
+              >
+                {EMPLOYER_MANAGEMENT_SUBMENU.map(({ slug, label, Icon }) => (
+                  <li key={slug}>
+                    <NavLink
+                      to={`/modules/${slug}`}
+                      title={label}
+                      onClick={onClose}
+                      className={({ isActive }) =>
+                        clsx(
+                          'flex items-center gap-2 rounded-lg py-2 pl-2 pr-1 text-[13px] leading-snug transition-colors',
+                          isActive
+                            ? 'bg-sky-50 font-medium text-[#00338d] ring-1 ring-sky-100/80 dark:bg-sky-950/40 dark:text-sky-300 dark:ring-sky-900/80'
+                            : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100',
+                        )
+                      }
+                    >
+                      <Icon
+                        className="h-4 w-4 shrink-0 text-[#00338d]/90"
+                        strokeWidth={1.65}
+                      />
+                      <span className="min-w-0 flex-1">{label}</span>
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
           <div className="pt-1">
             <button

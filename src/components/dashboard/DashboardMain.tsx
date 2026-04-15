@@ -1,5 +1,12 @@
+import { useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FilterBar } from './FilterBar'
+import { QuickActionsBar } from './QuickActionsBar'
 import { KpiGrid } from './KpiGrid'
+import { ActionCenter } from './ActionCenter'
+import { UploadHealthCard } from './UploadHealthCard'
+import { EndorsementFunnelCard } from './EndorsementFunnelCard'
+import { TopBlockersPanel } from './TopBlockersPanel'
 import { EnrolmentPanel } from './EnrolmentPanel'
 import { EndorsementPanel } from './EndorsementPanel'
 import { RegionalMap } from './RegionalMap'
@@ -9,9 +16,29 @@ import { PolicySection } from './PolicySection'
 import { kpiStats } from '../../data/dashboardMock'
 
 export function DashboardMain() {
+  const navigate = useNavigate()
+
+  const handleKpiDrillDown = useCallback(
+    (label: string) => {
+      const routeByLabel: Record<string, string> = {
+        Employers: '/modules/employer',
+        'Active Policies': '/policies/policy-list',
+        'Inactive Policies': '/policies/policy-list',
+        'Expired Policies': '/policies/policy-list',
+        'Pending Approval Policies': '/policies/policy-list',
+        'Active Employees': '/modules/member-verification',
+        'Inactive Employees': '/modules/member-verification',
+        'Claims Registered': '/modules/claims',
+      }
+      navigate(routeByLabel[label] ?? '/')
+    },
+    [navigate],
+  )
+
   return (
     <main className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col gap-6 px-3 py-6 sm:px-6 dark:text-inherit">
       <FilterBar />
+      <QuickActionsBar />
 
       <div className="rounded-2xl border border-slate-200/60 bg-white/60 px-4 py-3 text-sm shadow-sm backdrop-blur-sm dark:border-slate-700/80 dark:bg-slate-900/60 sm:px-5">
         <span className="font-medium text-slate-500 dark:text-slate-400">
@@ -31,7 +58,18 @@ export function DashboardMain() {
         </span>
       </div>
 
-      <KpiGrid stats={kpiStats} />
+      <KpiGrid stats={kpiStats} onDrillDown={handleKpiDrillDown} />
+
+      <section className="space-y-4">
+        <ActionCenter />
+
+        <div className="grid gap-4 xl:grid-cols-2">
+          <UploadHealthCard />
+          <EndorsementFunnelCard />
+        </div>
+
+        <TopBlockersPanel />
+      </section>
 
       <div className="grid gap-4 lg:grid-cols-12 lg:items-stretch">
         <div className="lg:col-span-4">
