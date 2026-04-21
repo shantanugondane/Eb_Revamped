@@ -123,6 +123,23 @@ export function NavigationDrawer({ open, onClose }: NavigationDrawerProps) {
           </NavLink>
 
           <NavLink
+            to="/dashboard-new"
+            title="dashbaord new"
+            onClick={onClose}
+            className={({ isActive }) =>
+              clsx(
+                'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors',
+                isActive
+                  ? 'bg-sky-50 text-[#00338d] ring-1 ring-sky-100 dark:bg-sky-950/50 dark:text-sky-300 dark:ring-sky-900'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-[#00338d] dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-sky-400',
+              )
+            }
+          >
+            <Home className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
+            dashbaord new
+          </NavLink>
+
+          <NavLink
             to="/modules/endorsement"
             title="Endorsement"
             onClick={onClose}

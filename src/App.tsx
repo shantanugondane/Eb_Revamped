@@ -10,6 +10,7 @@ import { OnboardEmployerPage } from './pages/employer-management/OnboardEmployer
 import { PolicyModulePage } from './pages/PolicyModulePage'
 import { ProfilePage } from './pages/ProfilePage'
 import { SettingsPage } from './pages/SettingsPage'
+import ExecutiveDashboard from './pages/ExecutiveDashboard'
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       <Route element={<BrokerLayout />}>
         <Route index element={<DashboardMain />} />
         <Route path="dashboard" element={<DashboardMain />} />
+        <Route path="dashboard-new" element={<ExecutiveDashboard />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="policies/create-policy" element={<CreatePolicyPage />} />

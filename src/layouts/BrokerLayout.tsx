@@ -10,6 +10,7 @@ export function BrokerLayout() {
   const [navOpen, setNavOpen] = useState(false)
   const { pathname } = useLocation()
   const loginInit = useRef(false)
+  const isExecutiveDashboard = pathname === '/dashboard-new'
 
   useEffect(() => {
     setNavOpen(false)
@@ -29,14 +30,18 @@ export function BrokerLayout() {
 
   return (
     <div className="flex min-h-screen min-w-0 flex-col bg-slate-100 font-sans text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-      <NavigationDrawer open={navOpen} onClose={() => setNavOpen(false)} />
+      {!isExecutiveDashboard ? (
+        <NavigationDrawer open={navOpen} onClose={() => setNavOpen(false)} />
+      ) : null}
       <div className="flex min-w-0 flex-1 flex-col">
-        <Header
-          menuOpen={navOpen}
-          onMenuToggle={() => setNavOpen((open) => !open)}
-        />
+        {!isExecutiveDashboard ? (
+          <Header
+            menuOpen={navOpen}
+            onMenuToggle={() => setNavOpen((open) => !open)}
+          />
+        ) : null}
         <Outlet />
-        <Footer />
+        {!isExecutiveDashboard ? <Footer /> : null}
       </div>
     </div>
   )
