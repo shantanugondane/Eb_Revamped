@@ -217,7 +217,7 @@ export default function ExecutiveDashboard() {
 
   return (
     <div
-      className="h-screen overflow-hidden bg-[var(--bg-primary)] p-3 text-[var(--text-primary)]"
+      className="min-h-screen overflow-y-auto bg-[var(--bg-primary)] p-2 text-[var(--text-primary)] sm:p-3 xl:h-screen xl:overflow-hidden"
       style={{ ...THEME, fontFamily: '"DM Sans", sans-serif' }}
     >
       <style>{`
@@ -263,22 +263,22 @@ export default function ExecutiveDashboard() {
         style={{ backgroundImage: NOISE_BG, mixBlendMode: 'soft-light' }}
       />
 
-      <div className="relative grid h-full grid-rows-[60px_120px_minmax(0,1fr)_240px] gap-3">
-        <CardShell className="flex items-center justify-between px-4 pl-14">
-          <div className="flex min-w-0 items-center gap-4">
+      <div className="relative grid h-full min-h-0 gap-3 xl:grid-rows-[60px_120px_minmax(0,1fr)_240px]">
+        <CardShell className="flex flex-col gap-3 px-3 py-3 pl-14 sm:px-4 sm:pl-14 lg:flex-row lg:items-center lg:justify-between lg:py-0">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
             <div className="leading-none">
-              <p className="font-['Syne'] text-xl font-semibold tracking-tight">LOOM</p>
+              <p className="font-['Syne'] text-lg font-semibold tracking-tight sm:text-xl">LOOM</p>
               <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">
                 TATA AIG
               </p>
             </div>
           </div>
 
-          <div className="mx-6 flex min-w-0 flex-1 items-center justify-center gap-2">
+          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2 lg:mx-4 lg:justify-center">
             <select
               value={selectedBroker}
               onChange={(e) => setSelectedBroker(e.target.value)}
-              className="h-9 min-w-[170px] rounded-full border border-[var(--border)] bg-[#0d1427] px-3 text-sm outline-none ring-0"
+              className="h-9 min-w-[140px] flex-1 rounded-full border border-[var(--border)] bg-[#0d1427] px-3 text-xs outline-none ring-0 sm:min-w-[170px] sm:flex-none sm:text-sm"
             >
               {BROKERS.map((broker) => (
                 <option key={broker}>{broker}</option>
@@ -287,19 +287,19 @@ export default function ExecutiveDashboard() {
             <select
               value={selectedEmployer}
               onChange={(e) => setSelectedEmployer(e.target.value)}
-              className="h-9 min-w-[180px] rounded-full border border-[var(--border)] bg-[#0d1427] px-3 text-sm outline-none ring-0"
+              className="h-9 min-w-[140px] flex-1 rounded-full border border-[var(--border)] bg-[#0d1427] px-3 text-xs outline-none ring-0 sm:min-w-[180px] sm:flex-none sm:text-sm"
             >
               {EMPLOYERS.map((employer) => (
                 <option key={employer}>{employer}</option>
               ))}
             </select>
-            <div className="flex items-center gap-1 rounded-full border border-[var(--border)] bg-[#0d1427] p-1">
+            <div className="flex max-w-full flex-wrap items-center gap-1 rounded-full border border-[var(--border)] bg-[#0d1427] p-1">
               {DATE_RANGES.map((range) => (
                 <button
                   key={range}
                   type="button"
                   onClick={() => setDateRange(range)}
-                  className={`rounded-full px-2.5 py-1 text-xs ${
+                  className={`rounded-full px-2 py-1 text-[11px] sm:px-2.5 sm:text-xs ${
                     dateRange === range ? 'bg-[var(--accent-blue)] text-white' : 'text-slate-300'
                   }`}
                 >
@@ -310,7 +310,7 @@ export default function ExecutiveDashboard() {
             <button
               type="button"
               onClick={() => setNewOnly((v) => !v)}
-              className={`flex h-9 items-center gap-2 rounded-full border px-3 text-xs ${
+              className={`flex h-9 items-center gap-2 rounded-full border px-2.5 text-[11px] sm:px-3 sm:text-xs ${
                 newOnly
                   ? 'border-emerald-300/40 bg-emerald-500/15 text-emerald-300'
                   : 'border-[var(--border)] bg-[#0d1427] text-slate-300'
@@ -324,7 +324,7 @@ export default function ExecutiveDashboard() {
             </button>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="ml-auto flex items-center gap-2 lg:ml-0">
             <button
               type="button"
               className="relative flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] bg-[#0d1427]"
@@ -344,7 +344,7 @@ export default function ExecutiveDashboard() {
           </div>
         </CardShell>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {DASHBOARD_DATA.kpis.map((kpi, index) => {
             const Icon = kpi.icon
             const isLossCard = kpi.id === 'lossRatio'
@@ -380,7 +380,7 @@ export default function ExecutiveDashboard() {
                     <AlertTriangle className="h-4 w-4 text-[var(--accent-red)]" />
                   ) : null}
                 </div>
-                <p className="text-3xl font-semibold tabular-nums">
+                <p className="text-2xl font-semibold tabular-nums sm:text-3xl">
                   {kpi.prefix}
                   {counterValue}
                   {kpi.suffix}
@@ -425,18 +425,18 @@ export default function ExecutiveDashboard() {
           })}
         </div>
 
-        <div className="grid min-h-0 grid-cols-[4fr_3fr_3fr] gap-3">
-          <CardShell className="flex min-h-0 flex-col p-3">
+        <div className="grid min-h-0 grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-[4fr_3fr_3fr]">
+          <CardShell className="flex min-h-0 flex-col p-3 md:col-span-2 xl:col-span-1">
             <p className="font-['Syne'] text-base">Premium by Employer</p>
             <p className="mb-2 text-xs text-[var(--text-muted)]">Profit / Loss per account</p>
-            <div className="min-h-0 flex-1">
+            <div className="h-56 min-h-0 flex-1 sm:h-64 xl:h-auto">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={premiumRows} layout="vertical" barCategoryGap={10}>
                   <XAxis type="number" tick={{ fill: '#94A3B8', fontSize: 11 }} />
                   <YAxis
                     type="category"
                     dataKey="employer"
-                    width={108}
+                    width={92}
                     tick={{ fill: '#E2E8F0', fontSize: 11 }}
                   />
                   <Tooltip
@@ -461,7 +461,7 @@ export default function ExecutiveDashboard() {
               </ResponsiveContainer>
             </div>
             <div className="shrink-0 pt-2 text-xs text-slate-300">
-              <div className="flex items-center gap-4 rounded-md border border-[var(--border)] bg-[#0d1427] px-2 py-1.5">
+              <div className="flex flex-wrap items-center gap-3 rounded-md border border-[var(--border)] bg-[#0d1427] px-2 py-1.5">
               <span className="flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-[var(--accent-green)]" />
                 Profit
@@ -511,7 +511,7 @@ export default function ExecutiveDashboard() {
             </div>
           </CardShell>
 
-          <CardShell className="flex min-h-0 flex-col p-3">
+          <CardShell className="flex min-h-0 flex-col p-3 md:col-span-2 xl:col-span-1">
             <p className="mb-2 font-['Syne'] text-base">Loss Ratio by Employer</p>
             <div className="loom-scroll min-h-0 flex-1 overflow-y-auto pr-1">
               <div className="grid grid-cols-[1.25fr_repeat(3,1fr)] gap-1.5 text-xs">
@@ -540,7 +540,7 @@ export default function ExecutiveDashboard() {
           </CardShell>
         </div>
 
-        <div className="grid min-h-0 grid-cols-[3fr_2fr] gap-3">
+        <div className="grid min-h-0 grid-cols-1 gap-3 xl:grid-cols-[3fr_2fr]">
           <CardShell className="flex min-h-0 flex-col p-3">
             <div className="mb-2">
               <p className="font-['Syne'] text-base">Employer Portfolio</p>
@@ -548,8 +548,8 @@ export default function ExecutiveDashboard() {
                 Shows profit/loss per employer at a glance
               </p>
             </div>
-            <div className="loom-scroll min-h-0 flex-1 overflow-y-auto pr-1">
-              <table className="w-full border-separate border-spacing-y-1.5 text-xs">
+            <div className="loom-scroll min-h-0 flex-1 overflow-auto pr-1">
+              <table className="min-w-[640px] w-full border-separate border-spacing-y-1.5 text-xs">
                 <thead>
                   <tr className="text-left text-slate-400">
                     <th className="px-2 py-1 font-medium">Employer</th>
