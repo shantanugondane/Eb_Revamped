@@ -264,7 +264,7 @@ export default function ExecutiveDashboard() {
       />
 
       <div className="relative grid h-full grid-rows-[60px_120px_minmax(0,1fr)_240px] gap-3">
-        <CardShell className="flex items-center justify-between px-4">
+        <CardShell className="flex items-center justify-between px-4 pl-14">
           <div className="flex min-w-0 items-center gap-4">
             <div className="leading-none">
               <p className="font-['Syne'] text-xl font-semibold tracking-tight">LOOM</p>

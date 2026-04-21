@@ -9,20 +9,20 @@ export function LiveClaimsTable() {
 
   return (
     <>
-      <section className="flex min-h-[320px] flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[var(--shadow-soft)] dark:border-slate-700/80 dark:bg-slate-900">
-        <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3 dark:border-slate-800 sm:px-5">
+      <section className="flex min-h-[320px] flex-col overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--bg-card)] shadow-[var(--shadow-soft)] transition-colors hover:border-slate-300 hover:bg-[var(--bg-card-hover)]">
+        <div className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3 sm:px-5">
           <div>
-            <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+            <h2 className="font-['Syne'] text-sm font-semibold text-[var(--text-primary)]">
               Live cashless claims
             </h2>
-            <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+            <p className="mt-0.5 text-xs text-[var(--text-muted)]">
               Latest intimation pipeline (sample rows).
             </p>
           </div>
           <button
             type="button"
             onClick={() => setFilterOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition hover:bg-slate-100 hover:text-[#00338d] dark:hover:bg-slate-800 dark:hover:text-sky-400"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--text-muted)] transition hover:bg-slate-100 hover:text-[var(--accent-blue)]"
             aria-label="Open live cashless claims filter"
             aria-haspopup="dialog"
             aria-expanded={filterOpen}
@@ -31,10 +31,10 @@ export function LiveClaimsTable() {
           </button>
         </div>
 
-      <div className="overflow-x-auto">
+      <div className="loom-scroll overflow-x-auto">
         <table className="w-full min-w-[900px] border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b border-slate-100 bg-slate-50/80 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:border-slate-800 dark:bg-slate-950/80 dark:text-slate-400">
+            <tr className="border-b border-[var(--border)] bg-slate-50 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-muted)]">
               <th className="whitespace-nowrap px-4 py-3">Claim ID</th>
               <th className="whitespace-nowrap px-4 py-3">Employee name</th>
               <th className="whitespace-nowrap px-4 py-3">Employee code</th>
@@ -45,31 +45,31 @@ export function LiveClaimsTable() {
               <th className="whitespace-nowrap px-4 py-3">Claim status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+          <tbody className="divide-y divide-slate-100">
             {liveClaims.map((row) => (
               <tr
                 key={row.id}
-                className="transition hover:bg-slate-50/80 dark:hover:bg-slate-800/50"
+                className="transition hover:bg-slate-50"
               >
-                <td className="whitespace-nowrap px-4 py-3 font-medium text-[#00338d] dark:text-sky-400">
+                <td className="whitespace-nowrap px-4 py-3 font-medium text-[var(--accent-blue)]">
                   {row.id}
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 text-slate-800 dark:text-slate-200">
+                <td className="whitespace-nowrap px-4 py-3 text-[var(--text-primary)]">
                   {row.employee}
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 tabular-nums text-slate-600 dark:text-slate-400">
+                <td className="whitespace-nowrap px-4 py-3 tabular-nums text-[var(--text-muted)]">
                   {row.code}
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 text-slate-700 dark:text-slate-300">
+                <td className="whitespace-nowrap px-4 py-3 text-[var(--text-primary)]">
                   {row.corporate}
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 tabular-nums text-slate-600 dark:text-slate-400">
+                <td className="whitespace-nowrap px-4 py-3 tabular-nums text-[var(--text-muted)]">
                   {row.policy}
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 text-slate-700 dark:text-slate-300">
+                <td className="whitespace-nowrap px-4 py-3 text-[var(--text-primary)]">
                   {row.patient}
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 text-slate-700 dark:text-slate-300">
+                <td className="whitespace-nowrap px-4 py-3 text-[var(--text-primary)]">
                   {row.hospital}
                 </td>
                 <td className="whitespace-nowrap px-4 py-3">
@@ -77,9 +77,9 @@ export function LiveClaimsTable() {
                     className={clsx(
                       'inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium',
                       row.statusVariant === 'success' &&
-                        'bg-emerald-50 text-emerald-800 ring-1 ring-emerald-200/60',
+                        'bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/20',
                       row.statusVariant === 'muted' &&
-                        'bg-slate-100 text-slate-600 ring-1 ring-slate-200/80',
+                        'bg-slate-100 text-[var(--text-muted)] ring-1 ring-slate-200',
                     )}
                   >
                     {row.status}
@@ -91,12 +91,12 @@ export function LiveClaimsTable() {
         </table>
       </div>
 
-      <div className="mt-auto flex items-center justify-between border-t border-slate-100 px-4 py-3 text-sm text-slate-600 dark:border-slate-800 dark:text-slate-400">
-        <span className="text-xs sm:text-sm">1 of 125</span>
+      <div className="mt-auto flex items-center justify-between border-t border-[var(--border)] px-4 py-3 text-sm text-[var(--text-muted)]">
+        <span className="text-xs sm:text-sm text-[var(--text-muted)]">1 of 125</span>
         <div className="flex items-center gap-1">
           <button
             type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 transition hover:bg-slate-50 disabled:opacity-40 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-[var(--text-muted)] transition hover:bg-slate-100 disabled:opacity-30"
             disabled
             aria-label="Previous page"
           >
@@ -104,7 +104,7 @@ export function LiveClaimsTable() {
           </button>
           <button
             type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-[var(--text-muted)] transition hover:bg-slate-100"
             aria-label="Next page"
           >
             <ChevronRight className="h-4 w-4" />

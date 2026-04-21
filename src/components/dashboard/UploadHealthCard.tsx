@@ -3,36 +3,36 @@ import { uploadHealthStats } from '../../data/dashboardMock'
 
 export function UploadHealthCard() {
   return (
-    <section className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[var(--shadow-soft)] dark:border-slate-700/80 dark:bg-slate-900 sm:p-5">
+    <section className="rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-4 shadow-[var(--shadow-soft)] transition-colors hover:border-slate-300 hover:bg-[var(--bg-card-hover)] sm:p-5">
       <div className="flex items-center justify-between gap-3">
-        <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+        <h2 className="font-['Syne'] text-sm font-semibold text-[var(--text-primary)]">
           Upload Health
         </h2>
-        <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 ring-1 ring-emerald-200/60 dark:bg-emerald-950/40 dark:text-emerald-300 dark:ring-emerald-900/50">
+        <span className="rounded-full bg-emerald-500/15 px-2.5 py-1 text-[11px] font-semibold text-emerald-300 ring-1 ring-emerald-500/20">
           Healthy
         </span>
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-2.5">
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-3 dark:border-emerald-900 dark:bg-emerald-950/30">
-          <p className="text-[11px] font-medium uppercase tracking-wide text-emerald-700/90 dark:text-emerald-300/90">
+        <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3">
+          <p className="text-[11px] font-medium uppercase tracking-wide text-emerald-300/90">
             Success Rate
           </p>
-          <p className="mt-1 text-lg font-semibold text-emerald-700 dark:text-emerald-300">
+          <p className="mt-1 text-lg font-semibold text-emerald-300">
             {uploadHealthStats.successRate}%
           </p>
         </div>
-        <div className="rounded-xl border border-rose-200 bg-rose-50/60 p-3 dark:border-rose-900 dark:bg-rose-950/30">
-          <p className="text-[11px] font-medium uppercase tracking-wide text-rose-700/90 dark:text-rose-300/90">
+        <div className="rounded-xl border border-rose-500/20 bg-rose-500/10 p-3">
+          <p className="text-[11px] font-medium uppercase tracking-wide text-rose-300/90">
             Failure Rate
           </p>
-          <p className="mt-1 text-lg font-semibold text-rose-700 dark:text-rose-300">
+          <p className="mt-1 text-lg font-semibold text-rose-300">
             {uploadHealthStats.failureRate}%
           </p>
         </div>
       </div>
 
-      <div className="mt-3 grid gap-2 text-xs text-slate-600 dark:text-slate-300">
+      <div className="mt-3 grid gap-2 text-xs text-[var(--text-muted)]">
         <p className="inline-flex items-center gap-1.5">
           <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
           Total processed today: {uploadHealthStats.totalProcessed} files
@@ -47,8 +47,8 @@ export function UploadHealthCard() {
         </p>
       </div>
 
-      <div className="mt-4 rounded-xl border border-slate-200 p-3 dark:border-slate-700">
-        <p className="mb-2 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-slate-500">
+      <div className="mt-4 rounded-xl border border-[var(--border)] bg-slate-50 p-3">
+        <p className="mb-2 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
           <AlertTriangle className="h-3.5 w-3.5" />
           Top failure reasons
         </p>
@@ -56,10 +56,10 @@ export function UploadHealthCard() {
           {uploadHealthStats.failureReasons.map((item) => (
             <li
               key={item.reason}
-              className="flex items-center justify-between gap-2 text-xs text-slate-600 dark:text-slate-300"
+              className="flex items-center justify-between gap-2 text-xs text-[var(--text-primary)]"
             >
               <span>{item.reason}</span>
-              <span className="rounded-md bg-slate-100 px-1.5 py-0.5 font-semibold tabular-nums text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+              <span className="rounded-md bg-white px-1.5 py-0.5 font-semibold tabular-nums text-[var(--text-primary)] ring-1 ring-slate-200">
                 {item.count}
               </span>
             </li>

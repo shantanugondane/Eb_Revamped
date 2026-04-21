@@ -23,43 +23,43 @@ const toneStyles: Record<
   { icon: string; ring: string; Icon: typeof Users }
 > = {
   orange: {
-    icon: 'bg-orange-100 text-orange-700',
-    ring: 'ring-orange-200/60',
+    icon: 'bg-orange-500/15 text-orange-400',
+    ring: 'ring-orange-500/20',
     Icon: Building2,
   },
   blue: {
-    icon: 'bg-sky-100 text-sky-700',
-    ring: 'ring-sky-200/60',
+    icon: 'bg-sky-500/15 text-sky-400',
+    ring: 'ring-sky-500/20',
     Icon: Shield,
   },
   green: {
-    icon: 'bg-emerald-100 text-emerald-700',
-    ring: 'ring-emerald-200/60',
+    icon: 'bg-emerald-500/15 text-emerald-400',
+    ring: 'ring-emerald-500/20',
     Icon: ShieldOff,
   },
   rose: {
-    icon: 'bg-rose-100 text-rose-700',
-    ring: 'ring-rose-200/60',
+    icon: 'bg-rose-500/15 text-rose-400',
+    ring: 'ring-rose-500/20',
     Icon: FileWarning,
   },
   navy: {
-    icon: 'bg-indigo-100 text-indigo-800',
-    ring: 'ring-indigo-200/60',
+    icon: 'bg-indigo-500/15 text-indigo-400',
+    ring: 'ring-indigo-500/20',
     Icon: ClipboardList,
   },
   teal: {
-    icon: 'bg-teal-100 text-teal-800',
-    ring: 'ring-teal-200/60',
+    icon: 'bg-teal-500/15 text-teal-400',
+    ring: 'ring-teal-500/20',
     Icon: UserCheck,
   },
   sky: {
-    icon: 'bg-sky-100 text-sky-800',
-    ring: 'ring-sky-200/60',
+    icon: 'bg-sky-500/15 text-sky-400',
+    ring: 'ring-sky-500/20',
     Icon: Users,
   },
   pink: {
-    icon: 'bg-fuchsia-100 text-fuchsia-800',
-    ring: 'ring-fuchsia-200/60',
+    icon: 'bg-fuchsia-500/15 text-fuchsia-400',
+    ring: 'ring-fuchsia-500/20',
     Icon: HeartPulse,
   },
 }
@@ -74,7 +74,7 @@ export function KpiGrid({ stats, onDrillDown }: KpiGridProps) {
             type="button"
             key={stat.label}
             onClick={() => onDrillDown?.(stat.label)}
-            className="group flex w-full gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 text-left shadow-[var(--shadow-soft)] transition hover:border-slate-300/80 hover:shadow-md dark:border-slate-700/80 dark:bg-slate-900 dark:hover:border-slate-600"
+            className="group flex w-full gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-4 text-left shadow-[var(--shadow-soft)] transition hover:border-slate-300 hover:bg-[var(--bg-card-hover)]"
           >
             <div
               className={clsx(
@@ -86,13 +86,13 @@ export function KpiGrid({ stats, onDrillDown }: KpiGridProps) {
               <Icon className="h-5 w-5" strokeWidth={1.75} />
             </div>
             <div className="min-w-0">
-              <p className="text-[11px] font-medium uppercase tracking-wide text-slate-400 dark:text-slate-500">
+              <p className="text-[11px] font-medium uppercase tracking-wide text-[var(--text-muted)]">
                 {stat.label}
               </p>
-              <p className="mt-1 font-semibold tabular-nums tracking-tight text-slate-900 dark:text-slate-100">
+              <p className="mt-1 font-semibold tabular-nums tracking-tight text-[var(--text-primary)]">
                 {stat.value}
               </p>
-              <p className="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-[#00338d]">
+              <p className="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-[var(--accent-blue)]">
                 Drill down
                 <ArrowUpRight className="h-3 w-3" />
               </p>

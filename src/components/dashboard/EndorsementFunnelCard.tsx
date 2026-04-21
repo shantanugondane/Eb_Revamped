@@ -1,23 +1,20 @@
 import { endorsementFunnel } from '../../data/dashboardMock'
-import clsx from 'clsx'
-
 const tone = {
-  sky: 'bg-sky-100 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300',
-  amber: 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300',
-  emerald:
-    'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300',
-  rose: 'bg-rose-100 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300',
+  sky: '#3B82F6',
+  amber: '#F59E0B',
+  emerald: '#10B981',
+  rose: '#EF4444',
 } as const
 
 export function EndorsementFunnelCard() {
   const maxCount = Math.max(...endorsementFunnel.map((x) => x.count), 1)
 
   return (
-    <section className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[var(--shadow-soft)] dark:border-slate-700/80 dark:bg-slate-900 sm:p-5">
-      <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+    <section className="rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-4 shadow-[var(--shadow-soft)] transition-colors hover:border-slate-300 hover:bg-[var(--bg-card-hover)] sm:p-5">
+      <h2 className="font-['Syne'] text-sm font-semibold text-[var(--text-primary)]">
         Endorsement Funnel
       </h2>
-      <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+      <p className="mt-1 text-xs text-[var(--text-muted)]">
         Requested to completion pipeline
       </p>
 
@@ -27,17 +24,17 @@ export function EndorsementFunnelCard() {
           return (
             <div key={item.stage}>
               <div className="mb-1 flex items-center justify-between text-xs">
-                <span className="font-medium text-slate-700 dark:text-slate-300">
+                <span className="font-medium text-[var(--text-primary)]">
                   {item.stage}
                 </span>
-                <span className="font-semibold tabular-nums text-slate-800 dark:text-slate-100">
+                <span className="font-semibold tabular-nums text-[var(--text-primary)]">
                   {item.count}
                 </span>
               </div>
-              <div className="h-2 rounded-full bg-slate-100 dark:bg-slate-800">
+              <div className="h-2 rounded-full bg-slate-200">
                 <div
-                  className={clsx('h-2 rounded-full', tone[item.tone])}
-                  style={{ width: `${width}%` }}
+                  className="h-2 rounded-full"
+                  style={{ width: `${width}%`, backgroundColor: tone[item.tone] }}
                 />
               </div>
             </div>

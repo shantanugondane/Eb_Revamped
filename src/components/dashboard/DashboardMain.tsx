@@ -1,22 +1,30 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
+import type { CSSProperties } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FilterBar } from './FilterBar'
-import { QuickActionsBar } from './QuickActionsBar'
 import { KpiGrid } from './KpiGrid'
 import { ActionCenter } from './ActionCenter'
 import { UploadHealthCard } from './UploadHealthCard'
 import { EndorsementFunnelCard } from './EndorsementFunnelCard'
-import { TopBlockersPanel } from './TopBlockersPanel'
 import { EnrolmentPanel } from './EnrolmentPanel'
 import { EndorsementPanel } from './EndorsementPanel'
 import { RegionalMap } from './RegionalMap'
 import { AllClaimsCard } from './AllClaimsCard'
 import { LiveClaimsTable } from './LiveClaimsTable'
-import { PolicySection } from './PolicySection'
 import { kpiStats } from '../../data/dashboardMock'
 
 export function DashboardMain() {
   const navigate = useNavigate()
+  useEffect(() => {
+    const id = 'loom-operations-fonts'
+    if (document.getElementById(id)) return
+    const link = document.createElement('link')
+    link.id = id
+    link.rel = 'stylesheet'
+    link.href =
+      'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@500;600;700&display=swap'
+    document.head.appendChild(link)
+  }, [])
 
   const handleKpiDrillDown = useCallback(
     (label: string) => {
@@ -36,27 +44,44 @@ export function DashboardMain() {
   )
 
   return (
-    <main className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col gap-6 px-3 py-6 sm:px-6 dark:text-inherit">
+    <main
+      className="flex w-full flex-1 flex-col gap-4 px-3 py-4 text-slate-900 sm:px-6"
+      style={
+        {
+          '--bg-primary': '#f8fafc',
+          '--bg-card': '#ffffff',
+          '--bg-card-hover': '#f8fafc',
+          '--accent-green': '#10B981',
+          '--accent-red': '#EF4444',
+          '--accent-amber': '#F59E0B',
+          '--accent-blue': '#3B82F6',
+          '--text-primary': '#0f172a',
+          '--text-muted': '#6B7280',
+          '--border': 'rgba(15,23,42,0.08)',
+          fontFamily: '"DM Sans", sans-serif',
+          background: '#f8fafc',
+        } as CSSProperties
+      }
+    >
+      <style>{`
+        .loom-scroll {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(148,163,184,0.75) rgba(226,232,240,0.85);
+        }
+        .loom-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+        .loom-scroll::-webkit-scrollbar-track {
+          background: rgba(226,232,240,0.85); border-radius: 999px;
+        }
+        .loom-scroll::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg,rgba(148,163,184,0.75),rgba(100,116,139,0.75));
+          border-radius: 999px; border: 1px solid rgba(148,163,184,0.25);
+        }
+        .loom-scroll::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(180deg,rgba(191,219,254,0.9),rgba(148,163,184,0.9));
+        }
+        .loom-scroll::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+      `}</style>
       <FilterBar />
-      <QuickActionsBar />
-
-      <div className="rounded-2xl border border-slate-200/60 bg-white/60 px-4 py-3 text-sm shadow-sm backdrop-blur-sm dark:border-slate-700/80 dark:bg-slate-900/60 sm:px-5">
-        <span className="font-medium text-slate-500 dark:text-slate-400">
-          Corporate name:{' '}
-        </span>
-        <span className="text-slate-900 dark:text-slate-100">
-          Tata Capital Housing Finance Limited
-        </span>
-        <span className="mx-3 hidden text-slate-300 dark:text-slate-600 sm:inline">
-          ·
-        </span>
-        <span className="mt-2 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800 ring-1 ring-emerald-200/60 dark:bg-emerald-950/50 dark:text-emerald-300 dark:ring-emerald-900/50 sm:mt-0">
-          Confirmed{' '}
-          <span className="tabular-nums text-emerald-900 dark:text-emerald-200">
-            274
-          </span>
-        </span>
-      </div>
 
       <KpiGrid stats={kpiStats} onDrillDown={handleKpiDrillDown} />
 
@@ -67,8 +92,6 @@ export function DashboardMain() {
           <UploadHealthCard />
           <EndorsementFunnelCard />
         </div>
-
-        <TopBlockersPanel />
       </section>
 
       <div className="grid gap-4 lg:grid-cols-12 lg:items-stretch">
@@ -87,8 +110,6 @@ export function DashboardMain() {
         <AllClaimsCard />
         <LiveClaimsTable />
       </div>
-
-      <PolicySection />
     </main>
   )
 }

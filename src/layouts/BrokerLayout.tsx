@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import { Menu } from 'lucide-react'
 import { Footer } from '../components/dashboard/Footer'
 import { Header } from '../components/dashboard/Header'
 import { NavigationDrawer } from '../components/dashboard/NavigationDrawer'
@@ -30,10 +31,20 @@ export function BrokerLayout() {
 
   return (
     <div className="flex min-h-screen min-w-0 flex-col bg-slate-100 font-sans text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-      {!isExecutiveDashboard ? (
-        <NavigationDrawer open={navOpen} onClose={() => setNavOpen(false)} />
-      ) : null}
+      <NavigationDrawer open={navOpen} onClose={() => setNavOpen(false)} />
       <div className="flex min-w-0 flex-1 flex-col">
+        {isExecutiveDashboard ? (
+          <button
+            type="button"
+            onClick={() => setNavOpen(true)}
+            className="fixed left-4 top-[22px] z-[60] flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-slate-900/85 text-white shadow-lg backdrop-blur transition hover:bg-slate-800"
+            aria-label="Open navigation menu"
+            aria-controls="navigation-drawer"
+            aria-expanded={navOpen}
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+        ) : null}
         {!isExecutiveDashboard ? (
           <Header
             menuOpen={navOpen}

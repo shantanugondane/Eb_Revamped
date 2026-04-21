@@ -30,19 +30,17 @@ const quickActions = [
 
 export function QuickActionsBar() {
   return (
-    <section className="sticky top-2 z-20 rounded-2xl border border-slate-200/80 bg-white/95 p-3 shadow-[var(--shadow-soft)] backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:border-slate-700/80 dark:bg-slate-900/90 dark:supports-[backdrop-filter]:bg-slate-900/80">
-      <div className="flex flex-wrap items-center gap-2">
-        {quickActions.map(({ id, label, href, Icon }) => (
-          <Link
-            key={id}
-            to={href}
-            className="inline-flex items-center gap-1.5 rounded-full bg-[#00338d] px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:bg-[#0a4aad]"
-          >
-            <Icon className="h-3.5 w-3.5" />
-            {label}
-          </Link>
-        ))}
-      </div>
-    </section>
+    <div className="flex flex-wrap items-center gap-2">
+      {quickActions.map(({ id, label, href, Icon }) => (
+        <Link
+          key={id}
+          to={href}
+          className="inline-flex items-center gap-1.5 rounded-full border border-[#3B82F6]/25 bg-[rgba(59,130,246,0.15)] px-3 py-1.5 text-xs font-semibold text-[#3B82F6] transition hover:bg-[rgba(59,130,246,0.25)]"
+        >
+          <Icon className="h-3.5 w-3.5" />
+          {label}
+        </Link>
+      ))}
+    </div>
   )
 }

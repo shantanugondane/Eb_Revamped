@@ -106,7 +106,7 @@ export function NavigationDrawer({ open, onClose }: NavigationDrawerProps) {
           <NavLink
             to={dashboardPath}
             end
-            title="Dashboard"
+            title="Operations Dashboard"
             aria-current={onDashboard ? 'page' : undefined}
             onClick={onClose}
             className={({ isActive }) =>
@@ -119,12 +119,12 @@ export function NavigationDrawer({ open, onClose }: NavigationDrawerProps) {
             }
           >
             <Home className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
-            Dashboard
+            Operations Dashboard
           </NavLink>
 
           <NavLink
             to="/dashboard-new"
-            title="dashbaord new"
+            title="Executive Dashboard"
             onClick={onClose}
             className={({ isActive }) =>
               clsx(
@@ -136,7 +136,7 @@ export function NavigationDrawer({ open, onClose }: NavigationDrawerProps) {
             }
           >
             <Home className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
-            dashbaord new
+            Executive Dashboard
           </NavLink>
 
           <NavLink

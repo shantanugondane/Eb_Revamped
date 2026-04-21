@@ -12,19 +12,19 @@ export function AllClaimsCard() {
   }))
 
   return (
-    <section className="flex min-h-[320px] flex-col rounded-2xl border border-slate-200/80 bg-white shadow-[var(--shadow-soft)] dark:border-slate-700/80 dark:bg-slate-900">
-      <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3 dark:border-slate-800 sm:px-5">
+    <section className="flex min-h-[320px] flex-col rounded-xl border border-[var(--border)] bg-[var(--bg-card)] shadow-[var(--shadow-soft)] transition-colors hover:border-slate-300 hover:bg-[var(--bg-card-hover)]">
+      <div className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3 sm:px-5">
         <div>
-          <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+          <h2 className="font-['Syne'] text-sm font-semibold text-[var(--text-primary)]">
             All claims
           </h2>
-          <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+          <p className="mt-0.5 text-xs text-[var(--text-muted)]">
             Registered claims mix (mock %).
           </p>
         </div>
         <button
           type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--text-muted)] transition hover:bg-slate-100 hover:text-[var(--text-primary)]"
           aria-label="Chart options"
         >
           <SlidersHorizontal className="h-4 w-4" />
@@ -55,17 +55,19 @@ export function AllClaimsCard() {
                   'Share',
                 ]}
                 contentStyle={{
-                  borderRadius: 12,
-                  border: '1px solid #e2e8f0',
+                  borderRadius: 10,
+                  border: '1px solid rgba(15,23,42,0.12)',
+                  background: '#ffffff',
+                  color: '#0f172a',
                 }}
               />
             </PieChart>
           </ResponsiveContainer>
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
-            <span className="text-2xl font-bold tabular-nums tracking-tight text-slate-900">
+            <span className="text-2xl font-bold tabular-nums tracking-tight text-[var(--text-primary)]">
               {totalRegistered.toLocaleString()}
             </span>
-            <span className="mt-1 max-w-[8rem] text-[11px] font-medium leading-tight text-slate-500">
+            <span className="mt-1 max-w-[8rem] text-[11px] font-medium leading-tight text-[var(--text-muted)]">
               Claim registered
             </span>
           </div>
@@ -76,14 +78,14 @@ export function AllClaimsCard() {
               key={c.name}
               className="flex items-center justify-between gap-3 text-sm"
             >
-              <span className="flex items-center gap-2 text-slate-600">
+              <span className="flex items-center gap-2 text-[var(--text-muted)]">
                 <span
                   className="h-2.5 w-2.5 shrink-0 rounded-full"
                   style={{ backgroundColor: c.color }}
                 />
                 {c.name}
               </span>
-              <span className="font-semibold tabular-nums text-slate-900">
+              <span className="font-semibold tabular-nums text-[var(--text-primary)]">
                 {c.value}%
               </span>
             </li>

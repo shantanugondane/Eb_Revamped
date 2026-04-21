@@ -2,7 +2,6 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -12,27 +11,27 @@ import { endorsementSeries } from '../../data/dashboardMock'
 
 export function EndorsementPanel() {
   return (
-    <section className="flex min-h-[320px] flex-col rounded-2xl border border-slate-200/80 bg-white shadow-[var(--shadow-soft)] dark:border-slate-700/80 dark:bg-slate-900">
-      <div className="border-b border-slate-100 px-4 py-3 dark:border-slate-800 sm:px-5">
+    <section className="flex min-h-[320px] flex-col rounded-xl border border-[var(--border)] bg-[var(--bg-card)] shadow-[var(--shadow-soft)] transition-colors hover:border-slate-300 hover:bg-[var(--bg-card-hover)]">
+      <div className="border-b border-[var(--border)] px-4 py-3 sm:px-5">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
-            <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+            <h2 className="font-['Syne'] text-sm font-semibold text-[var(--text-primary)]">
               Endorsement
             </h2>
-            <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+            <p className="mt-0.5 text-xs text-[var(--text-muted)]">
               Monthly movement — additions, deletions, and updates.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 text-[11px] font-medium">
-            <span className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
+            <span className="inline-flex items-center gap-1.5 text-[var(--text-muted)]">
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
               Addition
             </span>
-            <span className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
+            <span className="inline-flex items-center gap-1.5 text-[var(--text-muted)]">
               <span className="h-2 w-2 rounded-full bg-sky-400" />
               Deletion
             </span>
-            <span className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
+            <span className="inline-flex items-center gap-1.5 text-[var(--text-muted)]">
               <span className="h-2 w-2 rounded-full bg-amber-400" />
               Updation
             </span>
@@ -49,32 +48,27 @@ export function EndorsementPanel() {
             <CartesianGrid
               strokeDasharray="3 6"
               vertical={false}
-              stroke="#e2e8f0"
+              stroke="rgba(15,23,42,0.08)"
             />
             <XAxis
               dataKey="name"
-              tick={{ fontSize: 11, fill: '#64748b' }}
+              tick={{ fontSize: 11, fill: '#6B7280' }}
               axisLine={false}
               tickLine={false}
             />
             <YAxis
-              tick={{ fontSize: 11, fill: '#64748b' }}
+              tick={{ fontSize: 11, fill: '#6B7280' }}
               axisLine={false}
               tickLine={false}
             />
             <Tooltip
               contentStyle={{
-                borderRadius: 12,
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 8px 24px rgb(15 23 42 / 0.08)',
+                borderRadius: 10,
+                border: '1px solid rgba(15,23,42,0.12)',
+                background: '#ffffff',
+                color: '#0f172a',
               }}
               labelStyle={{ fontWeight: 600, color: '#0f172a' }}
-            />
-            <Legend
-              wrapperStyle={{ fontSize: 12, paddingTop: 8 }}
-              formatter={(value) => (
-                <span className="text-slate-600">{value}</span>
-              )}
             />
             <Bar
               dataKey="addition"
